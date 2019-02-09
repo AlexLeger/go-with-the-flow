@@ -1,0 +1,44 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://repo1.maven.org/maven2" }
+    maven { url "https://repo.spring.io/release" }
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+    maven { url "https://repo.spring.io/libs-snapshot" }
+    maven { url "https://repo.spring.io/libs-milestone" }
+    maven { url "https://maven.eveoh.nl/content/repositories/releases" }
+    maven { url "https://artifacts.elastic.co/maven/"}
+    maven { url "https://plugins.gradle.org/m2/" }
+}
+
+
+group 'org.ale'
+version '0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile (
+            'com.h2database:h2:1.4.197',
+            //'org.projectlombok:lombok:1.18.2',
+            'org.slf4j:slf4j-api:1.7.25',
+            'org.flowable:flowable-engine:6.4.1'
+    )
+    testCompile(
+            'org.junit.jupiter:junit-jupiter-api:5.3.1',
+            'org.junit.jupiter:junit-jupiter-engine:5.3.1',
+            'org.junit.platform:junit-platform-gradle-plugin:1.2.0'
+    )
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
