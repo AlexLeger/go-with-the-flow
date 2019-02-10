@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.1.0.RELEASE'
+        springBootVersion = '2.1.2.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -9,45 +9,30 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
+
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
+group = 'org.ale'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
 repositories {
-    jcenter()
-    mavenLocal()
     mavenCentral()
-    maven { url "https://repo1.maven.org/maven2" }
-    maven { url "https://repo.spring.io/release" }
-    maven { url "https://repo.spring.io/snapshot" }
-    maven { url "https://repo.spring.io/milestone" }
-    maven { url "https://repo.spring.io/libs-snapshot" }
-    maven { url "https://repo.spring.io/libs-milestone" }
-    maven { url "https://maven.eveoh.nl/content/repositories/releases" }
-    maven { url "https://artifacts.elastic.co/maven/"}
-    maven { url "https://plugins.gradle.org/m2/" }
 }
 
-
-version '0.1-SNAPSHOT'
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 dependencies {
-    compile (
-            'com.h2database:h2:1.4.197',
-            //'org.projectlombok:lombok:1.18.2',
-            'org.slf4j:slf4j-api:1.7.25',
-            'org.flowable:flowable-spring-boot-starter-process-rest'
-    )
-//TODO Find out whether we I should use compile or implementation
-    testCompile(
-            'org.junit.jupiter:junit-jupiter-api:5.3.1',
-            'org.junit.jupiter:junit-jupiter-engine:5.3.1',
-            'org.junit.platform:junit-platform-gradle-plugin:1.2.0',
-            'org.springframework.boot:spring-boot-starter-test'
-    )
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+    implementation 'org.flowable:flowable-spring-boot-starter-process-rest:6.4.1'
+    implementation 'org.projectlombok:lombok:1.18.2'
+    runtimeOnly 'com.h2database:h2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    testImplementation 'org.junit.platform:junit-platform-gradle-plugin:1.2.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
